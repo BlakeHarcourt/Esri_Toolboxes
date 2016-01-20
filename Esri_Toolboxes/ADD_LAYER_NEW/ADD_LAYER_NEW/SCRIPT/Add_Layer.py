@@ -1,11 +1,11 @@
 #-------------------------------------------------------------------------------
 # Name:        Add_Layer
-# Purpose:     Add multiple layers to multiple mxds
+# Purpose:     Add multiple layers to multiple mxds.
 #
 # Author:      Blake Harcourt
 #
-# Created:     21/11/2013
-# Copyright:   (c) Blakeharcourt 2013
+# Created:     20/01/2016
+# Copyright:   (c) Blake Harcourt 2016
 # Licence:     Blake Harcourt
 #-------------------------------------------------------------------------------
 
@@ -13,14 +13,12 @@
 import arcpy
 import os
 
-
 mxd = arcpy.mapping.MapDocument("CURRENT")          #The script is being ran from the current MXD.
 layers = arcpy.mapping.ListLayers(mxd, "*")         #All layers in the current MXD can be acessed by the script.
 df = arcpy.mapping.ListDataFrames(mxd)[0]           #The dataframe in the current MXD can be accessed by the script.
 
-FEATURE_CLASS_COUNT = 0
-MXD_COUNT = 0
-
+FEATURE_CLASS_COUNT = 0								#Number of selected feature classes (FCs)
+MXD_COUNT = 0										#Number of ArcMap documents (MXDs)
 
 LAYERS_TO_ADD = arcpy.GetParameterAsText(0)         #Gets the input from the script GUI to find which feature classes to add.
 MAPS_TO_ADD = arcpy.GetParameterAsText(1)           #Gets the input from the script GUI to find which MXDS to add feature classes to.
@@ -37,7 +35,6 @@ for FC_DISPLAY in LAYERS_TO_ADD.split(';'):         #SPLITS THE INPUT LIST AND D
 
 arcpy.AddMessage("TOTAL NUMBER OF FEATURE CLASSES = " + str(FEATURE_CLASS_COUNT))
 
-
 arcpy.AddMessage("-----------------")
 arcpy.AddMessage("MXDS = ")
 
@@ -53,14 +50,12 @@ if str(POSITION_CHECK) == 'true':
 else:
     arcpy.AddMessage("TOC POSITION = BOTTOM")
 
-
 #ADD LAYERS TO MAPS-------------------------------------------------------------
 arcpy.AddMessage("-----------------")
 arcpy.AddMessage("COPYING FEATURE CLASSES TO MXD")
 for MAP in MAPS_TO_ADD.split(';'):
     MXD2 =arcpy.mapping.MapDocument(MAP)
     DF2 = arcpy.mapping.ListDataFrames(mxd)[0]
-
 
     for LAYER in LAYERS_TO_ADD.split(';'):
         arcpy.AddMessage(MAP + " "+LAYER)
@@ -78,33 +73,3 @@ for MAP in MAPS_TO_ADD.split(';'):
     arcpy.AddMessage("-----------------")
     MXD2.save()
     del MXD2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

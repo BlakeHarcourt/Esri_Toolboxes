@@ -1,17 +1,16 @@
 #-------------------------------------------------------------------------------
-# Name:        module1
+# Name:        Add_Fields.py
 # Purpose:	   Add multiple fields to multiple feature classes in a .mxd
 #
 # Author:      Blake Harcourt
 #
-# Created:     21/11/2013
-# Copyright:   (c) Blakeharcourt 2013
+# Created:     20/01/2016
+# Copyright:   (c) Blake Harcourt 2016
 # Licence:     Blake Harcourt
 #-------------------------------------------------------------------------------
 #IMPORTS
 import arcpy
 import os
-
 
 mxd = arcpy.mapping.MapDocument("CURRENT")          #The script is being ran from the current MXD.
 layers = arcpy.mapping.ListLayers(mxd, "*")         #All layers in the current MXD can be acessed by the script.
@@ -69,18 +68,7 @@ for FEATURES in LAYERS_TO_ADD.split(';'):
 		CURRENT_COUNT = CURRENT_COUNT + 1
 		arcpy.AddMessage("COMPLETED " + str(CURRENT_COUNT) + "/" + str(TOTAL_COUNT))
 
-
 #[Field Name] [Alias] [Editable] [IsNullable] [IsRequired] [Size] [Type]
 #[Precision] [Scale], [Merge Rule], [Delimiter], [Input Field Location, Input
 #Field Name], [Start Postion, End Postion], [Additional Input Field Location,
 #Input Field Name], [Start Postion, End Postion]
-
-
-
-
-
-
-
-
-
-
